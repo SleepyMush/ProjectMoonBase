@@ -1,8 +1,8 @@
 #include "core/Windows.h"
-#include "core/Game.h"
+#include "render/Common.h"
 
 Window window;
-Game game;
+Common common;
 
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
@@ -10,11 +10,11 @@ float lastFrame = 0.0f;
 int main()
 {
 	window.init();
+	common.initialize();
 
 	while (!glfwWindowShouldClose(window)) 
 	{
 		glfwSwapBuffers(window);
-		game.Input(deltaTime, window);
 
 		//Time Processing
 		float currentFrame = static_cast<float>(glfwGetTime());
@@ -25,7 +25,7 @@ int main()
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		game.update(deltaTime);
+		common.render();
 
 		glfwPollEvents();
 	}
